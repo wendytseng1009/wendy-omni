@@ -7,13 +7,37 @@
   </head>
 </body>
     <title>refresh tableau dashboard view</title>
-<script
-        type='module' 
-        src='https://10ax.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js'>
+<script type="text/javascript" src="https://public.tableau.com/javascripts/api/tableau-2.js"></script>
+
+<body onload="initialize();">
+     
+    <div>API embed - Autorefresh every 5 seconds</div>
+    
+    <div id="myViz">
+        </div>
+    </div>
+
+</body>
+<script>
+
+var viz;
+function refreshView(){
+	viz.refreshDataAsync();
+}
+    function initialize() {
+
+        var placeholderDiv = document.getElementById("myViz");
+        var url = "https://10ax.online.tableau.com/t/wendytsengdev635134/views/Tableau_Webinar_0720/Dashboard";
+        var options = {
+            width: 1440,
+            height: 652,
+            toolbar: 'bottom'
+            }
+        viz = new tableau.Viz(placeholderDiv, url, options);
+        }
+
+    setInterval(refreshView,5000);
+
 </script>
-    <tableau-viz id='tableau-viz' 
-                 src='https://10ax.online.tableau.com/t/wendytsengdev635134/views/Tableau_Webinar_0720/Dashboard' 
-                 width='1440' height='652' toolbar='bottom' ></tableau-viz>
-  </body>
 </html>
 
